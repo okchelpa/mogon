@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Job name
+#SBATCH -J {myJob}
+
+# Specify stdout output file (%j expands to jobId)
+#SBATCH -o {myOutput}
+
+# Queue name
+#SBATCH -p long
+
+# Total number of nodes requested (64 cores/node per Mogon I node)
+#SBATCH -N 1
+
+# Total number of tasks
+#SBATCH -n 1
+
+# Number of CPUs per task
+# SBATCH --cpus-per-task 1
+
+# Run time (hh:mm:ss) - 120 hours
+#SBATCH -t 120:00:00
+
+# Memory reservation
+#SBATCH --mem 128GB
+
+# Specify allocation to charge against
+#SBATCH -A komet337hpc
+
+# unload all modules
+module purge
+
+# load necessary modules
+module load math/MATLAB/2018b
+module load lang/Python/2.7.15-intel-2018.03
+
+# launch the executable
+./{script} {varA} {varB}
